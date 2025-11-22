@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Vayrahh - Checkout</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root{
+      --pink:#ff7aa2;
+      --pink-soft:#ffe4ef;
+      --card:#ffffff;
+      --text:#231f20;
+    }
+    *{box-sizing:border-box;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial}
+    body{margin:0;background:linear-gradient(180deg,#fff 0%,#fff7fb 100%);color:var(--text);}
+    header{
+      display:flex;align-items:center;justify-content:space-between;
+      padding:14px 22px;background:#fff;border-bottom:1px solid #f7cadd;
+    }
+    .brand{display:flex;align-items:center;gap:10px}
+    .logo-circle{
+      width:40px;height:40px;border-radius:999px;
+      background:radial-gradient(circle at 30% 30%,#ffeef7,#ff7aa2);
+      display:flex;align-items:center;justify-content:center;
+      font-weight:700;font-size:16px;color:#fff;
+    }
+    .title-wrap h1{margin:0;font-size:18px;letter-spacing:0.16em;text-transform:uppercase;}
+    .title-wrap span{font-size:11px;color:#777}
+    nav a{
+      text-decoration:none;font-size:14px;padding:8px 10px;border-radius:999px;
+      border:1px solid #ffd1e3;background:#fff;color:#d12f6b;margin-left:4px;
+    }
+    nav a.primary{background:var(--pink);border-color:var(--pink);color:#fff;}
+    .container{max-width:900px;margin:22px auto;padding:0 18px;}
+    .layout{display:grid;grid-template-columns:2fr 1.4fr;gap:18px;}
+    .card{
+      background:var(--card);border-radius:16px;padding:14px;
+      box-shadow:0 8px 18px rgba(204,126,150,0.16);
+      border:1px solid #ffe1ee;
+    }
+    label{display:block;margin-top:8px;font-size:13px;}
+    input,textarea{
+      width:100%;border-radius:10px;border:1px solid #ffd1e3;padding:8px 10px;
+      font-size:13px;margin-top:3px;
+    }
+    textarea{resize:vertical;min-height:70px;}
+    .small{font-size:12px;color:#777;}
+    .items-list{font-size:13px;margin-top:4px;}
+    .items-list div{display:flex;justify-content:space-between;margin-bottom:4px;}
+    .total-row{display:flex;justify-content:space-between;margin-top:8px;font-size:14px;}
+    .total-row strong{color:#c2185b;}
+    .btn-primary{
+      margin-top:10px;
+      border:none;border-radius:999px;padding:9px 16px;font-size:14px;
+      background:var(--pink);color:#fff;cursor:pointer;
+    }
+    .cod-tag{
+      display:inline-block;background:var(--pink-soft);color:#b21852;
+      border-radius:999px;padding:4px 10px;font-size:11px;border:1px solid #ffd1e3;
+      margin-bottom:4px;
+    }
+    .thankyou{
+      text-align:center;padding:20px 10px;font-size:14px;
+    }
+    .thankyou h3{margin-top:0;}
+    .thankyou strong{color:#c2185b;}
+    .link-btn{
+      display:inline-block;margin-top:10px;font-size:13px;
+      text-decoration:none;color:#d12f6b;border:1px solid #ffd1e3;
+      padding:6px 12px;border-radius:999px;background:#fff;
+    }
+    @media(max-width:780px){
+      .layout{grid-template-columns:1fr;}
+    }
+    footer{text-align:center;font-size:11px;color:#888;padding:18px 0;margin-top:24px;}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div class="logo-circle">V</div>
+      <div class="title-wrap">
+        <h1>VAYRAHH</h1>
+        <span>Checkout · Cash on Delivery</span>
+      </div>
+    </div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="cart.html">Cart</a>
+      <a href="checkout.html" class="primary">Buy</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h2>Customer Details & Order Summary</h2>
+    <p class="small">Fill your details. Payment is <strong>Cash on Delivery (COD)</strong> only. This is a demo project for your minor.</p>
+
+    <div class="layout" id="checkoutContent">
+      <div class="card">
+        <div class="cod-tag">Payment mode: Cash on Delivery only</div>
+        <form id="checkoutForm">
+          <label>Full Name</label>
+          <input id="name" required placeholder="Enter your full name" />
+
+          <label>Phone Number</label>
+          <input id="phone" required placeholder="10-digit mobile number" />
+
+          <label>Address</label>
+          <textarea id="address" required placeholder="House no, street, area"></textarea>
+
+          <div style="display:flex;gap:10px;">
+            <div style="flex:1;">
+              <label>City</label>
+              <input id="city" required />
+            </div>
+            <div style="flex:1;">
+              <label>Pincode</label>
+              <input id="pincode" required />
+            </div>
+          </div>
+
+          <label>Landmark (optional)</label>
+          <input id="landmark" placeholder="Near mall, school, etc." />
+
+          <button class="btn-primary" type="submit">Place Order (COD)</button>
+        </form>
+      </div>
+
+      <div class="card">
+        <h3 style="margin-top:0;">Order Summary</h3>
+        <div id="itemsBox" class="items-list"></div>
+        <div class="total-row">
+          <span>Total (COD)</span>
+          <strong id="total">₹0</strong>
+        </div>
+        <div class="small" style="margin-top:6px;">
+          Note: This is a <strong>student project</strong>. Order data is stored only in your browser.
+        </div>
+      </div>
+    </div>
+
+    <div id="thankyouBox" class="card" style="display:none;">
+      <div class="thankyou">
+        <h3>Thank you for your order! 🎀</h3>
+        <p id="thankyouText"></p>
+        <a href="index.html" class="link-btn">Back to Home</a>
+        <a href="cart.html" class="link-btn">View Cart</a>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    Built using HTML, CSS & JavaScript · Vayrahh minor project.
+  </footer>
+
+  <script>
+    const $ = (id)=>document.getElementById(id);
+
+    function getCart(){
+      return JSON.parse(localStorage.getItem('vay_cart') || '[]');
+    }
+    function setLastOrder(order){
+      localStorage.setItem('vay_last_order', JSON.stringify(order));
+    }
+
+    function renderSummary(){
+      const box = $('itemsBox');
+      const cart = getCart();
+      if(cart.length === 0){
+        box.innerHTML = '<div class="small">Your cart is empty. Please add products from the Home page.</div>';
+        $('total').textContent = '₹0';
+        return;
+      }
+      let html = '';
+      let total = 0;
+      cart.forEach(i=>{
+        const line = i.price * i.qty;
+        total += line;
+        html += `<div><span>${i.title} × ${i.qty}</span><span>₹${line}</span></div>`;
+      });
+      box.innerHTML = html;
+      $('total').textContent = '₹' + total;
+    }
+
+    $('checkoutForm').onsubmit = function(e){
+      e.preventDefault();
+      const cart = getCart();
+      if(cart.length === 0){
+        alert('Your cart is empty. Please add products first.');
+        return;
+      }
+      const order = {
+        id: 'VAY' + Date.now(),
+        name: $('name').value.trim(),
+        phone: $('phone').value.trim(),
+        address: $('address').value.trim(),
+        city: $('city').value.trim(),
+        pincode: $('pincode').value.trim(),
+        landmark: $('landmark').value.trim(),
+        items: cart,
+        total: cart.reduce((s,i)=>s + i.price * i.qty, 0),
+        payment: 'Cash on Delivery'
+      };
+      setLastOrder(order);
+      localStorage.setItem('vay_cart','[]');
+
+      $('checkoutContent').style.display = 'none';
+      $('thankyouBox').style.display = 'block';
+      $('thankyouText').innerHTML =
+        `Hi <strong>${order.name}</strong>, your order <strong>${order.id}</strong> has been placed successfully.<br><br>` +
+        `Total payable amount: <strong>₹${order.total}</strong> (Cash on Delivery).<br>` +
+        `Delivery address: <em>${order.address}, ${order.city} - ${order.pincode}</em>.<br>` +
+        (order.landmark ? `Landmark: ${order.landmark}<br>` : '') +
+        `<br>We will contact you on <strong>${order.phone}</strong> before delivery.<br><br>` +
+        `Thank you for shopping with <strong>Vayrahh</strong> ✨`;
+      window.scrollTo({top:0,behavior:'smooth'});
+    };
+
+    renderSummary();
+  </script>
+</body>
+</html>
